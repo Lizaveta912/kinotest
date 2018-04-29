@@ -1,0 +1,14 @@
+/*
+Theme Name: Unite Child
+Template: unite
+Theme URI: http://localhost/mysite/
+Description: Дочерняя тема для unite
+Author: Lizaveta
+Version: 1.0
+*/
+@import url('../unite/style.css');
+
+
+.widget-title{
+	color: red
+}
