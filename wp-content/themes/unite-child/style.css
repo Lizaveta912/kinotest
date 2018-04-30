@@ -9,8 +9,27 @@ Version: 1.0
 @import url('../unite/style.css');
 
 .widget-title{
-	color: red
+	color: #FE2E64;
 }
 .entry-title{
        font-size: 20px;
+}
+hr.section-divider2 {
+  height: 1px;
+  background: #EEE;
+  position: relative;
+  overflow: visible;
+  z-index: 100;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.new-l-style{
+	font-size: 16px;
+}
+.entry-single-title{
+	font-size: 32px;
+}
+
+body {
+	background-color: #F8EFFB;
 }

@@ -6,19 +6,26 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header page-header">
-	<h1 class="entry-title "><?php the_title(); ?></h1>
-
-		<div class="entry-meta">
-			<?php unite_posted_on(); ?>
-		</div><!-- .entry-meta -->
+	<h4 class="entry-single-title "><?php the_title(); ?></h4>
 	</header><!-- .entry-header -->
-        это шаблон для для одного поста типа фильм
 		<?php 
                     if ( of_get_option( 'single_post_image', 1 ) == 1 ) :
                         the_post_thumbnail( 'unite-featured', array( 'class' => 'thumbnail' )); 
                     endif;
                   ?>
-        <p> Страны <br>
+		<p> <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+        	Жанры:
+			<?php
+				$cur_terms = get_the_terms( $post->ID, 'genre' );
+				$end_element = array_pop($cur_terms);
+					foreach ( $cur_terms as $cur_term ) {
+						echo '<a href="' . get_term_link( (int) $cur_term->term_id, $cur_term->taxonomy ) . '">' . $cur_term->name . '</a>,';
+					}
+					echo '<a href="' . get_term_link( (int) $end_element->term_id, $end_element->taxonomy ) . '">' . $end_element->name . '</a>.';
+			?>
+        </p>
+        <p> <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
+        	Странa: 
 			<?php
 				$cur_terms = get_the_terms( $post->ID, 'country' );
 				$end_element = array_pop($cur_terms);
@@ -28,7 +35,7 @@
 					echo '<a href="' . get_term_link( (int) $end_element->term_id, $end_element->taxonomy ) . '">' . $end_element->name . '</a>.';
 			?>
         </p>
-        <p> Годы <br>
+        <p> Год: 
 			
 			<?php
 				$cur_terms = get_the_terms( $post->ID, 'year' );
@@ -39,17 +46,7 @@
 					echo '<a href="' . get_term_link( (int) $end_element->term_id, $end_element->taxonomy ) . '">' . $end_element->name . '</a>.';
 			?>
         </p>
-        <p> Жанры <br>
-			<?php
-				$cur_terms = get_the_terms( $post->ID, 'genre' );
-				$end_element = array_pop($cur_terms);
-					foreach ( $cur_terms as $cur_term ) {
-						echo '<a href="' . get_term_link( (int) $cur_term->term_id, $cur_term->taxonomy ) . '">' . $cur_term->name . '</a>,';
-					}
-					echo '<a href="' . get_term_link( (int) $end_element->term_id, $end_element->taxonomy ) . '">' . $end_element->name . '</a>.';
-			?>
-        </p>
-        <p> Актеры <br>
+        <p> Актеры: 
 			<?php
 				$cur_terms = get_the_terms( $post->ID, 'actor' );
 				$end_element = array_pop($cur_terms);
@@ -59,13 +56,20 @@
 					echo '<a href="' . get_term_link( (int) $end_element->term_id, $end_element->taxonomy ) . '">' . $end_element->name . '</a>.';
 			?>
         </p>
-        <p>
-            Цена <?= get_post_meta( $post->ID, 'film_price', true ) ?> <br>
-            Дата <?= get_post_meta( $post->ID, 'film_date', true ) ?>
-        </p>
-		
+        <label>
+			<span class="glyphicon glyphicon-bitcoin" aria-hidden="true"></span>
+	        Цена: <b><?= get_post_meta( $post->ID, 'film_price', true ) ?></b>   
+        </label>
+        <br>
+        <label>
+        	<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+        	Дата сеанса: <b><?= get_post_meta( $post->ID, 'film_date', true ) ?></b>
+        </label>
 
 	<div class="entry-content">
+		<p class="new-l-style"><i><b>
+	        Сюжет:
+        </b></i>
 		<?php the_content(); ?>
 		<?php
 			wp_link_pages( array(
@@ -73,9 +77,12 @@
 				'after'  => '</div>',
 			) );
 		?>
+		</p>
+		<hr class="section-divider2">
 	</div><!-- .entry-content -->
 
 	<footer class="entry-meta">
+		<?php unite_posted_on(); ?>
 		<?php
 			/* translators: used between list items, there is a space after the comma */
 			$category_list = get_the_category_list( __( ', ', 'unite' ) );
@@ -111,6 +118,6 @@
 
 		<?php edit_post_link( __( 'Edit', 'unite' ), '<i class="fa fa-pencil-square-o"></i><span class="edit-link">', '</span>' ); ?>
 		<?php unite_setPostViews(get_the_ID()); ?>
-		<hr class="section-divider">
+
 	</footer><!-- .entry-meta -->
 </article><!-- #post-## -->
