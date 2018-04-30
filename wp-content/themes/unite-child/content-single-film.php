@@ -21,34 +21,42 @@
         <p> Страны <br>
 			<?php
 				$cur_terms = get_the_terms( $post->ID, 'country' );
-				foreach ( $cur_terms as $cur_term ) {
-					echo '<a href="' . get_term_link( (int) $cur_term->term_id, $cur_term->taxonomy ) . '">' . $cur_term->name . '</a>,';
-				}
+				$end_element = array_pop($cur_terms);
+					foreach ( $cur_terms as $cur_term ) {
+						echo '<a href="' . get_term_link( (int) $cur_term->term_id, $cur_term->taxonomy ) . '">' . $cur_term->name . '</a>,';
+					}
+					echo '<a href="' . get_term_link( (int) $end_element->term_id, $end_element->taxonomy ) . '">' . $end_element->name . '</a>.';
 			?>
         </p>
         <p> Годы <br>
 			
 			<?php
 				$cur_terms = get_the_terms( $post->ID, 'year' );
-				foreach ( $cur_terms as $cur_term ) {
-					echo '<a href="' . get_term_link( (int) $cur_term->term_id, $cur_term->taxonomy ) . '">' . $cur_term->name . '</a>,';
-				}
+				$end_element = array_pop($cur_terms);
+					foreach ( $cur_terms as $cur_term ) {
+						echo '<a href="' . get_term_link( (int) $cur_term->term_id, $cur_term->taxonomy ) . '">' . $cur_term->name . '</a>,';
+					}
+					echo '<a href="' . get_term_link( (int) $end_element->term_id, $end_element->taxonomy ) . '">' . $end_element->name . '</a>.';
 			?>
         </p>
         <p> Жанры <br>
 			<?php
 				$cur_terms = get_the_terms( $post->ID, 'genre' );
-				foreach ( $cur_terms as $cur_term ) {
-					echo '<a href="' . get_term_link( (int) $cur_term->term_id, $cur_term->taxonomy ) . '">' . $cur_term->name . '</a>,';
-				}
+				$end_element = array_pop($cur_terms);
+					foreach ( $cur_terms as $cur_term ) {
+						echo '<a href="' . get_term_link( (int) $cur_term->term_id, $cur_term->taxonomy ) . '">' . $cur_term->name . '</a>,';
+					}
+					echo '<a href="' . get_term_link( (int) $end_element->term_id, $end_element->taxonomy ) . '">' . $end_element->name . '</a>.';
 			?>
         </p>
         <p> Актеры <br>
 			<?php
 				$cur_terms = get_the_terms( $post->ID, 'actor' );
-				foreach ( $cur_terms as $cur_term ) {
-					echo '<a href="' . get_term_link( (int) $cur_term->term_id, $cur_term->taxonomy ) . '">' . $cur_term->name . '</a>,';
-				}
+				$end_element = array_pop($cur_terms);
+					foreach ( $cur_terms as $cur_term ) {
+						echo '<a href="' . get_term_link( (int) $cur_term->term_id, $cur_term->taxonomy ) . '">' . $cur_term->name . '</a>,';
+					}
+					echo '<a href="' . get_term_link( (int) $end_element->term_id, $end_element->taxonomy ) . '">' . $end_element->name . '</a>.';
 			?>
         </p>
         <p>

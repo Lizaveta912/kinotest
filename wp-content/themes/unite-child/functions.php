@@ -225,4 +225,59 @@
 			'query_var'           => true,
 		) );
 	}
+
+
 ?>
+
+<?php
+function display_test(){ 
+
+	$wpb_all_query = new WP_Query(array('post_type'=>'film', 'post_status'=>'publish', 'posts_per_page'=>5)); 
+	if ( $wpb_all_query->have_posts() ) {
+		$content ="<ul>";
+		while ( $wpb_all_query->have_posts() ) { 
+			$wpb_all_query->the_post(); 
+			$content .="<li><a href='".the_permalink()."'>".the_title()."</a></li>";
+
+		}
+		$content .="</ul>";
+		wp_reset_postdata();
+		}
+	return $content;
+}
+
+
+add_shortcode('view_test', 'display_test');
+?>
+
+<?php
+function ia_news_display_test($atts){ 
+
+extract(shortcode_atts(array(
+        'num' => 5
+        ), $atts));
+
+$args = array( 
+    'post_type'=>'film', 
+    'post_status'=>'publish',
+    'posts_per_page' => $num
+);
+
+    $testimonials = new WP_Query( $args );
+    var_dump($testimonials);
+				if( $testimonials->have_posts() ) {
+					while( $testimonials->have_posts() ) {
+						$testimonials->the_post();
+						get_template_part( 'content', get_post_type());			
+						}
+					unite_paging_nav();
+				}else {
+					get_template_part( 'content', 'none' );
+					
+				}	
+    wp_reset_postdata();
+    var_dump($content);
+    return get_template_part( 'content', get_post_type());
+}
+
+add_shortcode('ia_news_test', 'ia_news_display_test');
